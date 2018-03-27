@@ -1,7 +1,7 @@
 'use strict';
 
 const Controller = require('egg').Controller;
-// const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 
 class UserController extends Controller {
   async info() {
@@ -14,32 +14,34 @@ class UserController extends Controller {
 
   async login() {
     const { ctx, service } = this;
+
+    let msg = '';
+    let result = '';
+
     const user_name = ctx.request.body.user_name;
-    // const user = await ctx.service.user.getUserByLoginName(user_name);
+    const user = await ctx.service.user.getUserByLoginName(user_name);
 
-	ctx.body = 'ssss:'+user_name;
+    if (!user) {
+      msg = '用户不存在';
+      ctx.body = {"code":0,"msg":msg,"result":result};
+      return;
+    }
 
-    // if (!user) {
-    //   ctx.status = 404;
-    //   ctx.message = '这个用户不存在。';
-    //   return;
-    // }
+    const user_password = ctx.request.body.user_password;
+    if(user_password != user.password){
+      msg = '用户名或者密码错误';
+      ctx.body = {"code":0,"msg":msg,"result":result};
+    	return;
+    }
 
-    // const user_password = ctx.params.password;
-    // if(user_password != user.password){
-    // 	ctx.status = 404;
-    // 	ctx.message = '用户名或者密码错误！';
-    // 	return;
-    // }
+    let content = { name:user_name }; // 要生成token的加密信息
+    let secretOrPrivateKey = "app.get(user)"; // 这是加密的key（密钥） 
+    let time_out = 60*60*24;  //token有效时间，24小时后过期
+    
+    // 创建token
+    result = jwt.sign(content, secretOrPrivateKey, { expiresIn: time_out });
+    ctx.body = {"code":1,"msg":msg,"result":result};
 
-    // let content ={ name:user.name}; // 要生成token的主题信息
-    // let secretOrPrivateKey="app.get(user)"; // 这是加密的key（密钥） 
-    // let time_out = 60*60*24;  // 24小时过期
-    // // 创建token
-    // let token = jwt.sign(content, secretOrPrivateKey, { expiresIn: time_out });
-
-
-    // ctx.body = token;
 
   }
 
