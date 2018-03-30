@@ -34,9 +34,9 @@ class UserController extends Controller {
     	return;
     }
 
-    let content = { name:user_name }; // 要生成token的加密信息
-    let secretOrPrivateKey = "app.get(user)"; // 这是加密的key（密钥） 
-    let time_out = 60*60*24;  //token有效时间，24小时后过期
+    const content = { name:user_name }; // 要生成token的加密信息
+    const secretOrPrivateKey = this.app.config.secret_private_key; // 密钥
+    const time_out = 60*60*24;  //token有效时间，24小时后过期
     
     // 创建token
     result = jwt.sign(content, secretOrPrivateKey, { expiresIn: time_out });

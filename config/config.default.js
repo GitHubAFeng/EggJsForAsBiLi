@@ -3,11 +3,22 @@
 module.exports = appInfo => {
   const config = exports = {};
 
+
+  // debug 为 true 时，用于本地调试
+  config.debug = true;
+
+  config.secret_private_key = 'node_secret'; // token密钥
+
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_1521950350126_270';
 
-  // add your config here
-  config.middleware = [];
+  // 注册中间件
+  config.middleware = ['authUser','errorHandler'];
+
+    // errorHandler 中间件只对 /api 前缀的 url 路径生效
+    // config.errorHandler = {
+    //   match: '/api',
+    // };
 
   exports.security = {
     csrf: {
@@ -35,5 +46,12 @@ module.exports = appInfo => {
     agent: false,
   };
 
+  //日志目录
+  exports.logger = {
+    appLogName: `${appInfo.name}-web2.log`,
+  }
+
+
+  
   return config;
 };
