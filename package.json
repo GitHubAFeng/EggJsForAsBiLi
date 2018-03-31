@@ -9,7 +9,8 @@
     "egg-mysql": "^3.0.0",
     "egg-scripts": "^2.5.0",
     "egg-validate": "^1.0.0",
-    "jsonwebtoken": "^8.2.0"
+    "jsonwebtoken": "^8.2.0",
+    "request": "^2.85.0"
   },
   "devDependencies": {
     "autod": "^3.0.1",

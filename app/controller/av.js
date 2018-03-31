@@ -16,10 +16,12 @@ class AvController extends Controller {
     // };
   }
 
-  //主页随机推荐
-  async douga() {
+  //主页随机推荐列表
+  async list() {
     const { ctx } = this;
-
+    const av_type = ctx.query.type;   //视频数据类型
+    const list_page = ctx.query.page; //当前页码
+    const list_size = ctx.query.size; //每页数据数量
     // ctx.validate(this.createRule);
 
     //目前只知道info/warn日志会打印
@@ -28,7 +30,13 @@ class AvController extends Controller {
     // this.app.logger.info('启动耗时 %d ms', Date.now());
     // this.app.logger.warn('warning!');
 
-    const data = await ctx.service.av.dougaList();
+    const data = await ctx.service.av.list(
+      {
+        page: list_page,
+        size: list_size,
+        type: av_type
+      }
+    );
     const msg = 'ok';
     ctx.body = {"code":0,"msg":msg,"result":data};    
 

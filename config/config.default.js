@@ -7,6 +7,8 @@ module.exports = appInfo => {
   // debug 为 true 时，用于本地调试
   config.debug = true;
 
+  config.addr = 'http://127.0.0.1/';
+
   config.secret_private_key = 'node_secret'; // token密钥
 
   // use for cookie sign key, should change to your own and keep security

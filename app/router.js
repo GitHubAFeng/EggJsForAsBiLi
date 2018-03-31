@@ -18,7 +18,7 @@ module.exports = app => {
   //API
   //获取首页视频
   // router.resources('index/av', errorHandler, app.controller.av);
-  router.get('/index/douga', controller.av.douga);
+  router.get('/index/list', controller.av.list);
 
 
 
