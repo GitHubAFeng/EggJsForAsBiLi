@@ -1,33 +1,10 @@
-# wepy
+## 仿B站微信小程序的后端
 
 
+### 介绍
 
-## QuickStart
+前端：[仿B站微信小程序](https://github.com/GitHubAFeng/AsBiLi)
 
-<!-- add docs here for user -->
-
-see [egg docs][egg] for more detail.
-
-### Development
-
-```bash
-$ npm i
-$ npm run dev
-$ open http://localhost:7001/
-```
-
-### Deploy
-
-```bash
-$ npm start
-$ npm stop
-```
-
-### npm scripts
-
-- Use `npm run lint` to check code style.
-- Use `npm test` to run unit test.
-- Use `npm run autod` to auto detect dependencies upgrade, see [autod](https://www.npmjs.com/package/autod) for more detail.
+此后端代码采用ggjs框架，主要作用是采集B站的API并提供给小程序使用。
 
 
-[egg]: https://eggjs.org
