@@ -7,6 +7,7 @@ const Service = require('egg').Service;
 class AvService extends Service {
   constructor(ctx) {
     super(ctx);
+    //视频API，但找不到视频源地址
     this.root = 'https://www.bilibili.com/index/ding.json';
   }
 
@@ -67,13 +68,13 @@ class AvService extends Service {
           const name = element.pic.slice(element.pic.lastIndexOf('/') + 1)
 
           const res = await this.ctx.curl(element.pic, {
-            writeStream: fs.createWriteStream('./app/public/images/' + name),
+            writeStream: fs.createWriteStream('./app/public/images/douga/' + name),
           });
 
           let wxdata = {
             tname: element.tname,
             title: element.title,
-            pic: 'http://127.0.0.1:7001/public/images/' + name,
+            pic: 'http://127.0.0.1:7001/public/images/douga/' + name,
             ctime: element.ctime,
             desc: element.desc,
             aid: element.aid,

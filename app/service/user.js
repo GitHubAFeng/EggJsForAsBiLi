@@ -19,6 +19,12 @@ class UserService extends Service {
     return user;
   }
 
+  async insert(data) {
+    const result = await this.app.mysql.insert('wepy_user', data);
+    return result;
+  }
+
+
 }
 
 
